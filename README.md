@@ -46,8 +46,8 @@ java -version
 
 Framework ini menggunakan:
 
-- **RestAssured 5.3.0** - API testing
-- **TestNG 7.7.1** - Test framework
+- **RestAssured 5.5.6** - API testing
+- **TestNG 7.11.0** - Test framework
 
 Dependencies akan terdownload otomatis oleh Maven.
 
@@ -78,27 +78,13 @@ mvn test -Dtest=
 mvn test -DsuiteXmlFile=testng.xml
 ```
 
-## 📊 Test Reports
-
-Setelah test selesai, report dapat ditemukan di:
-
-```bash
-# TestNG HTML Report
-target/surefire-reports/html/index.html
-
-# XML Reports
-target/surefire-reports/
-
-# Console output
-target/surefire-reports/output.txt
-```
 
 ### TestNG Configuration
 
-Edit `testng.xml` untuk mengubah test suite configuration:
+Edit `testNG.xml` untuk mengubah test suite configuration:
 
 ```xml
-<suite name="Restful-Booker API Test Suite" parallel="tests" thread-count="3">
+<suite name="Suite1" verbose="1">
     <!-- Test classes configuration -->
 </suite>
 ```
