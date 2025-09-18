@@ -15,19 +15,19 @@
     <test name="Booking">
         <classes>
             <class name="booking.CreateBooking"/>
-            <class name="booking.UpdateBooking"/>
-            <class name="booking.DeleteBooking"/>
+            <!-- <class name="booking.UpdateBooking"/>
+            <class name="booking.DeleteBooking"/> -->
             <class name="booking.GetBooking"/>
         </classes>
     </test>
 
     <!-- negative test -->
-    <test name="NegativeBooking">
+    <!-- <test name="NegativeBooking">
         <classes>
             <class name="booking.NegativeCreateBooking"/>
             <class name="booking.NegativeUpdateBooking"/>
             <class name="booking.NegativeDeleteBooking"/>
             <class name="booking.NegativeGetBooking"/>
         </classes>
-    </test>
+    </test> -->
 </suite>

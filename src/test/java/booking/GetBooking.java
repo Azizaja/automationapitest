@@ -4,14 +4,14 @@ import static io.restassured.RestAssured.given;
 
 import org.testng.annotations.Test;
 
-public class GetBooking {
+public class GetBooking extends CreateBooking{
 
     @Test
     public void GetBookings() {
         // https://restful-booker.herokuapp.com/booking
         System.out.println("Get Booking");
         given()
-                .baseUri("https://restful-booker.herokuapp.com/booking/1")
+                .baseUri("https://restful-booker.herokuapp.com/booking/" + bookingId)
                 .when()
                 .get()
                 .then()

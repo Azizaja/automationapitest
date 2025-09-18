@@ -2,13 +2,21 @@ package auth;
 
 import static io.restassured.RestAssured.given;
 import org.testng.annotations.BeforeClass;
+
+import io.restassured.RestAssured;
 // import org.testng.annotations.Test;
 import io.restassured.response.Response;
 
 public class AuthenticationTest {
     String token;
+    int bookingid;
 
     @BeforeClass
+    public void setup() {
+        RestAssured.baseURI = "https://restful-booker.herokuapp.com";
+        GenerateToken();
+    }
+    
     public void GenerateToken() {
         // prepare data for generate token
         // positive test case generate and valid token
@@ -19,7 +27,7 @@ public class AuthenticationTest {
                    "password" : "password123"
                 }""";
         Response response = given()
-                .baseUri("https://restful-booker.herokuapp.com/auth")
+                // .baseUri("https://restful-booker.herokuapp.com/auth")
                 .header("Content-Type", "application/json")
                 .body(requestBody)
                 .when()
