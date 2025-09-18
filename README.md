@@ -16,8 +16,8 @@ Sebelum memulai, pastikan Anda telah menginstall:
 
 ```bash
 # Jika menggunakan git
-git clone <repository-url>
-cd restful-booker-api-test
+git clone https://github.com/Azizaja/automationapitest
+cd automationapitest
 
 # Atau download sebagai ZIP dan extract
 ```
