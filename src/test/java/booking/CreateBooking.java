@@ -1,14 +1,12 @@
 package booking;
 
 import static io.restassured.RestAssured.given;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import io.restassured.response.Response;
 
-public class CreateBooking {
-    int bookingId;
+public class CreateBooking extends BaseTest {
+    // int bookingId;
 
     @Test
     public void CreateBookings(){
@@ -38,6 +36,7 @@ public class CreateBooking {
 
           // SIMPAN bookingId untuk test selanjutnya
         bookingId = response.jsonPath().getInt("bookingid");
+        BaseTest.setBookingId(bookingId);
         System.out.println("Booking ID yang dibuat: " + bookingId);
         System.out.println("Create Booking Selesai");
     }
