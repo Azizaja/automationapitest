@@ -1,18 +1,16 @@
 package scenario.getBooking;
 
-import static io.restassured.RestAssured.given;
-
 import org.testng.annotations.Test;
 
+import apiengine.BooksColectionAPI;
+
 public class PositiveCase {
-      @Test
+    public BooksColectionAPI getBookingAPI;
+
+    @Test
     public void GetBookings() {
         System.out.println("Get Booking");
-        given()
-                // .baseUri("https://restful-booker.herokuapp.com/booking/" + bookingId)
-                .baseUri("https://restful-booker.herokuapp.com/booking/1")
-                .when()
-                .get()
+        BooksColectionAPI.getBooksFromCollectionsAPI()
                 .then()
                 .log().all();
         System.out.println("Get Booking Selesai");

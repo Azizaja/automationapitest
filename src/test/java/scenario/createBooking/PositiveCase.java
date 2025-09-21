@@ -7,7 +7,7 @@ import apiengine.BooksColectionAPI;
 import io.restassured.response.Response;
 
 public class PositiveCase {
-    public BooksColectionAPI createBookingAPI;
+     public BooksColectionAPI createBookingAPI;
 
     @Test
     public void CreateBookings() {
@@ -31,4 +31,5 @@ public class PositiveCase {
         Assert.assertEquals(response.jsonPath().getString("booking.firstname"), "Jim", "Firstname is not Jim");
         System.out.println("Create Booking Selesai");
     }
+
 }
