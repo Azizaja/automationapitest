@@ -22,4 +22,11 @@
             <class name="scenario.UpdateBooking.PositiveCase"/>
         </classes>
     </test> -->
+
+    <!-- delete booking -->
+    <!-- <test name="Delete Booking Test">
+        <classes>
+            <class name="scenario.deleteBooking.PositiveCase"/>
+        </classes>
+    </test> -->
 </suite>

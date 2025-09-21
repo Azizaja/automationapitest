@@ -62,4 +62,32 @@ public class BooksColectionAPI {
         return response;
     }
 
+    // delete booking
+    public static Response deleteBookingAPI() {
+        int idBooking = BaseTest.getBookingId();
+        String token = BaseTest.token;
+        // String token = TokenManager.getToken();
+
+        if (idBooking == 0) {
+            throw new IllegalStateException("Booking ID is not set. Please create a booking first.");
+        }
+        if (token == null || token.isEmpty()) {
+            throw new IllegalStateException("Token is not set. Please authenticate first.");
+        }
+
+        System.out.println("=== DELETE API DEBUG ===");
+        System.out.println("Booking ID: " + idBooking);
+        System.out.println("Token: " + token);
+
+        Response response = given()
+                .baseUri("https://restful-booker.herokuapp.com")
+                .basePath("/booking/" + idBooking)
+                .header("Content-Type", "application/json")
+                .header("Cookie", "token=" + token)
+                .when()
+                .delete();
+
+        return response;
+    }
+
 }
