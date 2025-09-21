@@ -1,24 +1,25 @@
 package com.apitest.base;
 
-import static io.restassured.RestAssured.given;
+// import static io.restassured.RestAssured.given;
 
-import org.testng.annotations.AfterMethod;
+// import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
+import com.apitest.utils.Helper;
 import com.apitest.utils.TokenManager;
 
-import io.restassured.RestAssured;
+// import io.restassured.RestAssured;
 
 public class BaseTest {
-    public static String token, baseURI;
+    public static String token, BaseURI;
     public static int bookingId;
 
     @BeforeSuite
     public void beforeSuite() {
         System.out.println("Before Suite: Setting up base URI and token");
         token = TokenManager.getToken();
-        baseURI = "https://restful-booker.herokuapp.com";
+        BaseURI = Helper.getEnv("BASE_URI");
     }
 
     @BeforeMethod

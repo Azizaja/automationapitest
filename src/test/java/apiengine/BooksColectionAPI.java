@@ -6,14 +6,15 @@ import com.apitest.base.BaseTest;
 
 import io.restassured.response.Response;
 
-public class BooksColectionAPI {
+public class BooksColectionAPI extends BaseTest {
     // public BooksColectionAPI() {
     // }
 
     // create booking
     public static Response createBookingAPI(String requestBody) {
         Response response = given()
-                .baseUri("https://restful-booker.herokuapp.com/booking")
+                .baseUri(BaseURI)
+                .basePath("/booking")
                 .header("Content-Type", "application/json")
                 .body(requestBody)
                 .when()
@@ -25,7 +26,8 @@ public class BooksColectionAPI {
     public static Response getBooksFromCollectionsAPI() {
         int idBooking = 1;
         Response response = given()
-                .baseUri("https://restful-booker.herokuapp.com/booking/" + idBooking)
+                .baseUri(BaseURI)
+                .basePath("/booking/" + idBooking)
                 .header("Content-Type", "application/json")
                 .when()
                 .get();
@@ -51,7 +53,7 @@ public class BooksColectionAPI {
         System.out.println("Token: " + token);
 
         Response response = given()
-                .baseUri("https://restful-booker.herokuapp.com")
+                .baseUri(BaseURI)
                 .basePath("/booking/" + idBooking)
                 .header("Content-Type", "application/json")
                 .header("Cookie", "token=" + token)
@@ -80,7 +82,7 @@ public class BooksColectionAPI {
         System.out.println("Token: " + token);
 
         Response response = given()
-                .baseUri("https://restful-booker.herokuapp.com")
+                .baseUri(BaseURI)
                 .basePath("/booking/" + idBooking)
                 .header("Content-Type", "application/json")
                 .header("Cookie", "token=" + token)
