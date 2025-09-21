@@ -3,7 +3,7 @@ package auth;
 import static io.restassured.RestAssured.given;
 import org.testng.annotations.BeforeClass;
 
-import booking.BaseTest;
+// import booking.BaseTest;
 import io.restassured.RestAssured;
 // import org.testng.annotations.Test;
 import io.restassured.response.Response;
@@ -18,31 +18,14 @@ public class AuthenticationTest {
         GenerateToken();
     }
 
-    // public void GenerateToken() {
-    //     // positive test case generate and valid token
-    //     System.out.println("Generate Token Auth");
-    //     String requestBody = """
-    //             {
-    //                "username" : "admin",
-    //                "password" : "password123"
-    //             }""";
-    //     Response response = given()
-    //             // .baseUri("https://restful-booker.herokuapp.com/auth")
-    //             .header("Content-Type", "application/json")
-    //             .body(requestBody)
-    //             .when()
-    //             .post();
-    //     token = response.jsonPath().getString("token");
-    //     System.out.println("berhasil generate token: " + token);
-    //     System.out.println("Generate Token Auth Completed");
-    // }
-
     public void GenerateToken() {
         System.out.println("Get Auth Token");
-        String requestBody = "{\n" +
-                "    \"username\" : \"admin\",\n" +
-                "    \"password\" : \"password123\"\n" +
-                "}";
+
+        String requestBody = """
+                {
+                   "username" : "admin",
+                   "password" : "password123"
+                }""";
 
         Response response = given()
                 // .baseUri("https://restful-booker.herokuapp.com/auth")
@@ -51,9 +34,11 @@ public class AuthenticationTest {
                 .when()
                 .post();
         token = response.jsonPath().getString("token");
-        BaseTest.setToken(token);
+        // BaseTest.setToken(token);
         System.out.println("Token: " + token);
         System.out.println("Get Auth Token Selesai");
     }
+
+    
 
 }
