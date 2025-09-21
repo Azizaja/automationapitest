@@ -26,6 +26,7 @@ public class PositiveCase {
         Response response = BooksColectionAPI.createBookingAPI(requestBody);
 
         response.then().log().all();
+        // bookingId = response.jsonPath().getInt("bookingid");
         Assert.assertEquals(response.statusCode(), 200, "Status code is not 200");
         Assert.assertNotNull(response.jsonPath().getString("bookingid"), "Booking ID is null");
         Assert.assertEquals(response.jsonPath().getString("booking.firstname"), "Jim", "Firstname is not Jim");
