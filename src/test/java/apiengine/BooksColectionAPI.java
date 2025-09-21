@@ -2,13 +2,15 @@ package apiengine;
 
 import static io.restassured.RestAssured.given;
 
+import com.apitest.base.BaseTest;
+
 import io.restassured.response.Response;
 
 public class BooksColectionAPI {
     // public BooksColectionAPI() {
     // }
 
-    //create booking
+    // create booking
     public static Response createBookingAPI(String requestBody) {
         Response response = given()
                 .baseUri("https://restful-booker.herokuapp.com/booking")
@@ -19,9 +21,9 @@ public class BooksColectionAPI {
         return response;
     }
 
-    //get booking
+    // get booking
     public static Response getBooksFromCollectionsAPI() {
-        int idBooking = 1; 
+        int idBooking = 1;
         Response response = given()
                 .baseUri("https://restful-booker.herokuapp.com/booking/" + idBooking)
                 .header("Content-Type", "application/json")
@@ -30,17 +32,33 @@ public class BooksColectionAPI {
         return response;
     }
 
-    //update booking
-    public static Response updateBookingAPI(String requestBody, String token) {
-        int idBooking = 1; 
+
+    // update booking
+    public static Response updateBookingAPI(String requestBody) {
+        int idBooking = BaseTest.getBookingId();
+        String token = BaseTest.token;
+        // String token = TokenManager.getToken();
+
+        if (idBooking == 0) {
+            throw new IllegalStateException("Booking ID is not set. Please create a booking first.");
+        }
+        if (token == null || token.isEmpty()) {
+            throw new IllegalStateException("Token is not set. Please authenticate first.");
+        }
+
+        System.out.println("=== UPDATE API DEBUG ===");
+        System.out.println("Booking ID: " + idBooking);
+        System.out.println("Token: " + token);
+
         Response response = given()
-                .baseUri("https://restful-booker.herokuapp.com/booking/" + idBooking)
+                .baseUri("https://restful-booker.herokuapp.com")
+                .basePath("/booking/" + idBooking)
                 .header("Content-Type", "application/json")
-                .header("Accept", "application/json")
                 .header("Cookie", "token=" + token)
                 .body(requestBody)
                 .when()
                 .put();
+
         return response;
     }
 

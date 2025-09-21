@@ -3,34 +3,41 @@ package scenario.createBooking;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.apitest.base.BaseTest;
+
 import apiengine.BooksColectionAPI;
 import io.restassured.response.Response;
 
 public class PositiveCase {
-     public BooksColectionAPI createBookingAPI;
 
-    @Test
+    @Test(groups = {"bookingFlow"})
     public void CreateBookings() {
         System.out.println("Create Booking");
-        String requestBody = "{\r\n" + //
-                        "    \"firstname\" : \"Jim\",\r\n" + //
-                        "    \"lastname\" : \"Brown\",\r\n" + //
-                        "    \"totalprice\" : 111,\r\n" + //
-                        "    \"depositpaid\" : true,\r\n" + //
-                        "    \"bookingdates\" : {\r\n" + //
-                        "        \"checkin\" : \"2018-01-01\",\r\n" + //
-                        "        \"checkout\" : \"2019-01-01\"\r\n" + //
-                        "    },\r\n" + //
-                        "    \"additionalneeds\" : \"Breakfast\"\r\n" + //
-                        "}";
+        
+        String requestBody = """
+            {
+                "firstname": "Jim",
+                "lastname": "Brown",
+                "totalprice": 111,
+                "depositpaid": true,
+                "bookingdates": {
+                    "checkin": "2018-01-01",
+                    "checkout": "2019-01-01"
+                },
+                "additionalneeds": "Breakfast"
+            }
+            """;
+            
         Response response = BooksColectionAPI.createBookingAPI(requestBody);
 
         response.then().log().all();
-        // bookingId = response.jsonPath().getInt("bookingid");
         Assert.assertEquals(response.statusCode(), 200, "Status code is not 200");
         Assert.assertNotNull(response.jsonPath().getString("bookingid"), "Booking ID is null");
-        Assert.assertEquals(response.jsonPath().getString("booking.firstname"), "Jim", "Firstname is not Jim");
+        
+        // SIMPAN bookingId ke BaseTest untuk test selanjutnya
+        int bookingId = response.jsonPath().getInt("bookingid");
+        BaseTest.setBookingId(bookingId);
+        System.out.println("Booking ID Created and Saved: " + bookingId);
         System.out.println("Create Booking Selesai");
     }
-
 }

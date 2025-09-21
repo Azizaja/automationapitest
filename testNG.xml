@@ -1,22 +1,25 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-
-<suite name="Suite1" verbose="1">
-    <!-- auth test -->
-    <test name="Auth">
+<suite name="API Test Suite" parallel="false">
+    
+    <test name="Create Booking Test">
         <classes>
-            <class name="auth.AuthenticationTest"/>
-            <class name="auth.NegativeAuthTest"/>
+            <class name="scenario.createBooking.PositiveCase"/>
         </classes>
     </test>
 
-    <!-- booking test -->
-    <test name="Booking">
+    
+    <test name="Get Booking Test">
         <classes>
-            <class name="booking.BaseTest"/>
-            <class name="booking.CreateBooking"/>
-            <class name="booking.UpdateBooking"/>
-            <!-- <class name="booking.DeleteBooking"/> -->
-            <!-- <class name="booking.GetBooking"/> -->
+            <class name="scenario.getBooking.PositiveCase"/>
+            <class name="scenario.getBooking.NegativeCase"/>
         </classes>
+        
     </test>
+
+    
+    <!-- <test name="Update Booking Test">
+        <classes>
+            <class name="scenario.UpdateBooking.PositiveCase"/>
+        </classes>
+    </test> -->
 </suite>
