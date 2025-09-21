@@ -1,17 +1,16 @@
 package scenario.createBooking;
 
-import static io.restassured.RestAssured.given;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-// import booking.BaseTest;
+import apiengine.BooksColectionAPI;
 import io.restassured.response.Response;
 
 public class PositiveCase {
+    public BooksColectionAPI createBookingAPI;
+
     @Test
-    public void CreateBookings(){
-        // https://restful-booker.herokuapp.com/booking
+    public void CreateBookings() {
         System.out.println("Create Booking");
         String requestBody = "{\r\n" + //
                         "    \"firstname\" : \"Jim\",\r\n" + //
@@ -24,23 +23,12 @@ public class PositiveCase {
                         "    },\r\n" + //
                         "    \"additionalneeds\" : \"Breakfast\"\r\n" + //
                         "}";
-        Response response = given()
-                        .baseUri("https://restful-booker.herokuapp.com/booking")
-                        .header("Content-Type", "application/json")
-                        .body(requestBody)
-                        .when()
-                        .post();
-        // response.then().log().all(); 
+        Response response = BooksColectionAPI.createBookingAPI(requestBody);
+
+        response.then().log().all();
         Assert.assertEquals(response.statusCode(), 200, "Status code is not 200");
         Assert.assertNotNull(response.jsonPath().getString("bookingid"), "Booking ID is null");
         Assert.assertEquals(response.jsonPath().getString("booking.firstname"), "Jim", "Firstname is not Jim");
-
-          // SIMPAN bookingId untuk test selanjutnya
-        // bookingId = response.jsonPath().getInt("bookingid");
-        // BaseTest.setBookingId(bookingId);
-        // System.out.println("Booking ID yang dibuat: " + bookingId);
         System.out.println("Create Booking Selesai");
     }
-
-
 }
