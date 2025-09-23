@@ -5,16 +5,18 @@ import static io.restassured.RestAssured.given;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.apitest.base.BaseTest;
+
 import io.restassured.response.Response;
 
-public class NegativeCase {
+public class NegativeCase extends BaseTest {
      @Test
     public void GetBooking_NonExistentID() {
         System.out.println("Negative Test: Non-Existent Booking ID");
         int nonExistentId = 999999;
 
         Response response = given()
-                .baseUri("https://restful-booker.herokuapp.com/booking/" + nonExistentId)
+                .baseUri(BaseURI + nonExistentId)
                 .when()
                 .get();
 
@@ -28,7 +30,7 @@ public class NegativeCase {
         System.out.println("Negative Test: Invalid ID Format");
 
         Response response = given()
-                .baseUri("https://restful-booker.herokuapp.com/booking/invalid_id")
+                .baseUri(BaseURI + "/invalid_id")
                 .when()
                 .get();
 

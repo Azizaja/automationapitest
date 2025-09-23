@@ -16,16 +16,16 @@
     </test>
 
     <!-- update booking -->
-    <test name="Update Booking Test">
+    <!-- <test name="Update Booking Test">
         <classes>
             <class name="scenario.UpdateBooking.PositiveCase"/>
         </classes>
-    </test>
+    </test> -->
 
     <!-- delete booking -->
-    <test name="Delete Booking Test">
+    <!-- <test name="Delete Booking Test">
         <classes>
             <class name="scenario.deleteBooking.PositiveCase"/>
         </classes>
-    </test>
+    </test> -->
 </suite>

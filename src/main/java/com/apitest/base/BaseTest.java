@@ -69,5 +69,6 @@ public class BaseTest {
     public void cleanup() {
         bookingId = 0; // Reset setelah semua test selesai
         token = null;
+        System.out.println("After Suite: Cleanup done");
     }
 }

@@ -22,7 +22,8 @@ public class BooksColectionAPI extends BaseTest {
 
     // get booking
     public static Response getBooksFromCollectionsAPI() {
-        int idBooking = 1;
+        // int idBooking = 1;
+        int idBooking = BaseTest.getBookingId();
         Response response = given()
                 .basePath("/booking/" + idBooking)
                 .when()

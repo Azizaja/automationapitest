@@ -2,9 +2,11 @@ package scenario.getBooking;
 
 import org.testng.annotations.Test;
 
+import com.apitest.base.BaseTest;
+
 import apiengine.BooksColectionAPI;
 
-public class PositiveCase {
+public class PositiveCase extends BaseTest {
     public BooksColectionAPI getBookingAPI;
 
     @Test
