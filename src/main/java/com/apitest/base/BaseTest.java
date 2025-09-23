@@ -4,7 +4,7 @@ import org.testng.annotations.AfterSuite;
 
 import static io.restassured.RestAssured.given;
 
-// import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
@@ -24,14 +24,6 @@ public class BaseTest {
         BaseURI = Helper.getEnv("BASE_URI");
     }
 
-    // @BeforeMethod
-    // public void checkBookingId() {
-    //     System.out.println("Current Booking ID: " + bookingId);
-    //     if (bookingId == 0) {
-    //         System.out.println("Warning: Booking ID is 0. Create booking test should run first.");
-    //     }
-    // }
-
     // untuk set request specification
     // supaya tidak perlu set berulang di setiap test
     @BeforeMethod
@@ -47,13 +39,20 @@ public class BaseTest {
                 .header("Content-Type", "application/json");
     }
 
-    // @AfterMethod
-    // public void afterMethod() {
-    // System.out.println("This is After Method");
-    // if (RestAssured.requestSpecification != null) {
-    // RestAssured.requestSpecification = null;
-    // }
-    // }
+    @AfterMethod
+    public void afterMethod() {
+        System.out.println("This is After Method");
+        if (RestAssured.requestSpecification != null) {
+            RestAssured.requestSpecification = null;
+        }
+    }
+
+    @AfterSuite
+    public void cleanup() {
+        bookingId = 0; // Reset setelah semua test selesai
+        token = null;
+        System.out.println("After Suite: Cleanup done");
+    }
 
     // set id booking
     public static void setBookingId(int id) {
@@ -63,12 +62,5 @@ public class BaseTest {
     // get id booking
     public static int getBookingId() {
         return bookingId;
-    }
-
-    @AfterSuite
-    public void cleanup() {
-        bookingId = 0; // Reset setelah semua test selesai
-        token = null;
-        System.out.println("After Suite: Cleanup done");
     }
 }
