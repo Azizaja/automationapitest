@@ -2,8 +2,8 @@ package auth;
 
 import static io.restassured.RestAssured.given;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
-// import booking.BaseTest;
 import io.restassured.RestAssured;
 // import org.testng.annotations.Test;
 import io.restassured.response.Response;
@@ -12,7 +12,7 @@ public class AuthenticationTest {
     String token;
     int bookingid;
 
-    @BeforeClass
+    @Test
     public void setup() {
         RestAssured.baseURI = "https://restful-booker.herokuapp.com";
         GenerateToken();
