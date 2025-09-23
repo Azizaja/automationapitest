@@ -1,5 +1,7 @@
 package com.apitest.base;
 
+import org.testng.annotations.AfterSuite;
+
 // import static io.restassured.RestAssured.given;
 
 // import org.testng.annotations.AfterMethod;
@@ -32,19 +34,19 @@ public class BaseTest {
 
     // @BeforeMethod
     // public void setupRequestSpecification(){
-    //     System.out.println("This is Before Method");
-    //     RestAssured.requestSpecification = given()
-    //                                         .baseUri(baseURI)
-    //                                         .header("Content-Type", "application/json")
-    //                                         .header("Cookie", "token=" + token);
+    // System.out.println("This is Before Method");
+    // RestAssured.requestSpecification = given()
+    // .baseUri(baseURI)
+    // .header("Content-Type", "application/json")
+    // .header("Cookie", "token=" + token);
     // }
 
     // @AfterMethod
     // public void afterMethod() {
-    //     System.out.println("This is After Method");
-    //     if (RestAssured.requestSpecification != null) {
-    //         RestAssured.requestSpecification = null;
-    //     }
+    // System.out.println("This is After Method");
+    // if (RestAssured.requestSpecification != null) {
+    // RestAssured.requestSpecification = null;
+    // }
     // }
 
     // set id booking
@@ -55,5 +57,11 @@ public class BaseTest {
     // get id booking
     public static int getBookingId() {
         return bookingId;
+    }
+
+    @AfterSuite
+    public void cleanup() {
+        bookingId = 0; // Reset setelah semua test selesai
+        token = null;
     }
 }

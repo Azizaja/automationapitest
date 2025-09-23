@@ -9,7 +9,8 @@ import io.restassured.response.Response;
 
 public class PositiveCase {
 
-    @Test(dependsOnGroups = {"bookingFlow"})
+    // @Test(dependsOnGroups = {"bookingFlow"})
+    @Test   
     public void UpdateBooking() {
         System.out.println("Update Booking");
         

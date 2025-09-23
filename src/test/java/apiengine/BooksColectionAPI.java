@@ -65,7 +65,7 @@ public class BooksColectionAPI extends BaseTest {
     }
 
     // delete booking
-    public static Response deleteBookingAPI() {
+    public static Response deleteBookingAPI(String requestBody) {
         int idBooking = BaseTest.getBookingId();
         String token = BaseTest.token;
         // String token = TokenManager.getToken();

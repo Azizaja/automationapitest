@@ -8,11 +8,13 @@ import com.apitest.base.BaseTest;
 import apiengine.BooksColectionAPI;
 import io.restassured.response.Response;
 
-public class PositiveCase {
+public class PositiveCase extends BaseTest {
 
-    @Test(groups = {"bookingFlow"})
+    // @Test(groups = {"bookingFlow"})
+    @Test
     public void CreateBookings() {
         System.out.println("Create Booking");
+        System.out.println("Base URI: " + BaseTest.BaseURI);
         
         String requestBody = """
             {

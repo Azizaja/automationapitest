@@ -8,12 +8,12 @@
     </test>
 
     
-    <!-- <test name="Get Booking Test">
+    <test name="Get Booking Test">
         <classes>
             <class name="scenario.getBooking.PositiveCase"/>
             <class name="scenario.getBooking.NegativeCase"/>
         </classes>
-    </test> -->
+    </test>
 
     
     <!-- <test name="Update Booking Test">
@@ -23,9 +23,9 @@
     </test> -->
 
     <!-- delete booking -->
-    <!-- <test name="Delete Booking Test">
+    <test name="Delete Booking Test">
         <classes>
             <class name="scenario.deleteBooking.PositiveCase"/>
         </classes>
-    </test> -->
+    </test>
 </suite>
