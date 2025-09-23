@@ -4,6 +4,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.apitest.base.BaseTest;
+import com.apitest.model.response.ResponseCreateBoking;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import apiengine.BooksColectionAPI;
 import io.restassured.response.Response;
@@ -12,7 +16,7 @@ public class PositiveCase extends BaseTest {
 
     // @Test(groups = {"bookingFlow"})
     @Test
-    public void CreateBookings() {
+    public void CreateBookings() throws JsonMappingException, JsonProcessingException {
         System.out.println("Create Booking");
         System.out.println("Base URI: " + BaseTest.BaseURI);
         
@@ -31,15 +35,23 @@ public class PositiveCase extends BaseTest {
             """;
             
         Response response = BooksColectionAPI.createBookingAPI(requestBody);
-
+        ObjectMapper objectMapper = new ObjectMapper();
+        ResponseCreateBoking bookingResponse = objectMapper.readValue(response.asString(), ResponseCreateBoking.class);
         response.then().log().all();
+        System.out.println(response.asPrettyString());
         Assert.assertEquals(response.statusCode(), 200, "Status code is not 200");
-        Assert.assertNotNull(response.jsonPath().getString("bookingid"), "Booking ID is null");
+        // contoh assert sebelumnya menggunakan jsonpath
+        // Assert.assertNotNull(response.jsonPath().getInt("bookingid"), "Booking ID is null");
+        // Assert.assertEquals(response.jsonPath().getString("booking.firstname"), "Jim", "Firstname is not Jim");
+        Assert.assertNotNull(bookingResponse.bookingId, "Booking ID is null");
+        Assert.assertEquals(bookingResponse.booking.firstName, "Jim", "Firstname is not Jim");
+        Assert.assertEquals(bookingResponse.booking.lastName, "Brown", "Lastname is not Brown");
         
         // SIMPAN bookingId ke BaseTest untuk test selanjutnya
-        int bookingId = response.jsonPath().getInt("bookingid");
-        BaseTest.setBookingId(bookingId);
+        int bookingId = bookingResponse.bookingId;
+        // BaseTest.setBookingId(bookingId);
         System.out.println("Booking ID Created and Saved: " + bookingId);
         System.out.println("Create Booking Selesai");
     }
+    
 }

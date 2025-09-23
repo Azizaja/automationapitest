@@ -54,13 +54,17 @@ public class BaseTest {
         System.out.println("After Suite: Cleanup done");
     }
 
+    // setter getter dikomen agar tiap test case lebih eksplisit passing id
+    // dan tidak tergantung state dari test lain (jika dalam satu class skenario lebih
+    // dari satu test case)
+    
     // set id booking
-    public static void setBookingId(int id) {
-        bookingId = id;
-    }
+    // public static void setBookingId(int id) {
+    //     bookingId = id;
+    // }
 
-    // get id booking
-    public static int getBookingId() {
-        return bookingId;
-    }
+    // // get id booking
+    // public static int getBookingId() {
+    //     return bookingId;
+    // }
 }

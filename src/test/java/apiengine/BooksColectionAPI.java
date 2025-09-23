@@ -21,9 +21,9 @@ public class BooksColectionAPI extends BaseTest {
     }
 
     // get booking
-    public static Response getBooksFromCollectionsAPI() {
+    public static Response getBooksFromCollectionsAPI(int idBooking) {
         // int idBooking = 1;
-        int idBooking = BaseTest.getBookingId();
+        // int idBooking = BaseTest.getBookingId();
         Response response = given()
                 .basePath("/booking/" + idBooking)
                 .when()
@@ -33,23 +33,16 @@ public class BooksColectionAPI extends BaseTest {
 
 
     // update booking
-    public static Response updateBookingAPI(String requestBody) {
-        int idBooking = BaseTest.getBookingId();
-        String token = BaseTest.token;
-
-        if (idBooking == 0) {
-            throw new IllegalStateException("Booking ID is not set. Please create a booking first.");
-        }
-        if (token == null || token.isEmpty()) {
-            throw new IllegalStateException("Token is not set. Please authenticate first.");
-        }
+    public static Response updateBookingAPI(String requestBody, int bookingId) {
+        // int idBooking = BaseTest.getBookingId();
+        String token = BaseTest.token;        
 
         System.out.println("=== UPDATE API DEBUG ===");
         // System.out.println("Booking ID: " + idBooking);
-        // System.out.println("Token: " + token);
+        System.out.println("Token: " + token);
 
         Response response = given()
-                .basePath("/booking/" + idBooking)
+                .basePath("/booking/" + bookingId)
                 .header("Cookie", "token=" + token)
                 .body(requestBody)
                 .when()
@@ -59,20 +52,13 @@ public class BooksColectionAPI extends BaseTest {
     }
 
     // delete booking
-    public static Response deleteBookingAPI(String requestBody) {
-        int idBooking = BaseTest.getBookingId();
+    public static Response deleteBookingAPI(String requestBody, int idBooking) {
+        // int idBooking = BaseTest.getBookingId();
         String token = BaseTest.token;
-
-        if (idBooking == 0) {
-            throw new IllegalStateException("Booking ID is not set. Please create a booking first.");
-        }
-        if (token == null || token.isEmpty()) {
-            throw new IllegalStateException("Token is not set. Please authenticate first.");
-        }
 
         System.out.println("=== DELETE API DEBUG ===");
         // System.out.println("Booking ID: " + idBooking);
-        // System.out.println("Token: " + token);
+        System.out.println("Token: " + token);
 
         Response response = given()
                 .basePath("/booking/" + idBooking)

@@ -10,7 +10,7 @@ import com.apitest.base.BaseTest;
 import io.restassured.response.Response;
 
 public class NegativeCase extends BaseTest {
-     @Test
+    @Test
     public void GetBooking_NonExistentID() {
         System.out.println("Negative Test: Non-Existent Booking ID");
         int nonExistentId = 999999;

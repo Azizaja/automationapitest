@@ -2,6 +2,11 @@ package com.apitest.model.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+// konsep serialization yaitu ubah objek Java menjadi JSON untuk request body
+// sesuai dengan struktur JSON request body yang dikirim ke API
+// ubah JSON property menjadi atribut di kelas ini
+// gunakan anotasi @JsonProperty untuk mapping nama property JSON ke atribut Java
+
 public class RequestCreateBooking {
     @JsonProperty("firstname")
     public String firstName;
@@ -28,4 +33,5 @@ public class RequestCreateBooking {
     }
 
     // Constructor
+    
 }

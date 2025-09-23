@@ -35,6 +35,9 @@ public class TokenManager {
         // BaseTest.setToken(token);
         System.out.println("Token: " + token);
         System.out.println("Get Auth Token Selesai");
+        if (token == null || token.isEmpty()) {
+            throw new IllegalStateException("Token is not set. Please authenticate first.");
+        }
         return token;
     }
 }
