@@ -13,7 +13,7 @@ import apiengine.BooksColectionAPI;
 import io.restassured.response.Response;
 
 public class PositiveCase extends BaseTest {
-    public BooksColectionAPI getBookingAPI;
+    // public BooksColectionAPI getBookingAPI;
 
     @Test
     public void CreateBookings() throws JsonMappingException, JsonProcessingException {
