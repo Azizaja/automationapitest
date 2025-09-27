@@ -14,11 +14,11 @@ import io.restassured.response.Response;
 
 public class PositiveCase extends BaseTest {
 
-    // @Test(dependsOnGroups = {"bookingFlow"})
-    // ada test createbooking -> updatebooking karena butuh bookingId dari
-    // createbooking
-    // untuk setiap test case harus mandiri, maka dibuat test createbooking di sini
+    // ada test createbooking -> updatebooking karena butuh bookingId
+    // untuk setiap test case harus berdiri sendiri, maka dibuat test createbooking di sini
     // agar mudah dimanage dan menjalankan test case ini secara mandiri
+    // jika menunggu create booking selesai bisa terlalu lama apabila terdapat lebih dari 1 test case
+    // dan apabila create booking gagal maka test update booking juga akan gagal
 
     int bookingId;
 

@@ -8,6 +8,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ConvertData {
 
     public static void main(String[] args) throws JsonMappingException, JsonProcessingException {
+
+        // untuk convert JSON String ke Java Object
+        // gunakan ObjectMapper dari Jackson library
+        // method readValue() untuk convert JSON String ke Java Object
+        // call di createBooking() di PositiveCase.java
+        // untuk mengconvert hasil response dari API (JSON String) ke Java Object
         String requestBody = """
             {
                 "firstname": "Jim",

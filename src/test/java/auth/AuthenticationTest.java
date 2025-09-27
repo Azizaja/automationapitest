@@ -41,6 +41,4 @@ public class AuthenticationTest extends BaseTest {
         System.out.println("Get Auth Token Selesai");
     }
 
-    
-
 }
