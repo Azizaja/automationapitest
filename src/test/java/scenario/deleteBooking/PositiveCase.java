@@ -70,6 +70,33 @@ public class PositiveCase extends BaseTest {
         Assert.assertEquals(response.statusCode(), 201, "Status code is not 201");
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Booking ID to be deleted: " + bookingId);
+    }
 
+    @Test
+    public void DeleteBooking_WithAdditionalNeeds() {
+        System.out.println("Positive Test: Delete Booking with Additional Needs");
+        
+        // First create special booking
+        String createBody = """
+            {
+                "firstname": "Special",
+                "lastname": "Delete",
+                "totalprice": 200,
+                "depositpaid": true,
+                "bookingdates": {
+                    "checkin": "2024-01-01",
+                    "checkout": "2024-01-05"
+                },
+                "additionalneeds": "Special request"
+            }
+            """;
+            
+        Response createResponse = BooksColectionAPI.createBookingAPI(createBody);
+        int specialBookingId = createResponse.jsonPath().getInt("bookingid");
+        
+        Response deleteResponse = BooksColectionAPI.deleteBookingAPI(createBody, specialBookingId);
+        
+        Assert.assertEquals(deleteResponse.statusCode(), 201);
+        System.out.println("Special booking with additional needs deleted");
     }
 }

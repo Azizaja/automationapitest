@@ -69,4 +69,27 @@ public class BooksColectionAPI extends BaseTest {
         return response;
     }
 
+    // delete booking without token
+    public static Response deleteBookingWithoutToken(int idBooking) {
+        Response response = given()
+                .basePath("/booking/" + idBooking)
+                .when()
+                .delete();
+
+        return response;
+    }
+
+    // delete booking with id
+    public static Response deleteBookingWithId(int idBooking) {
+        String token = BaseTest.token;
+
+        Response response = given()
+                .basePath("/booking/" + idBooking)
+                .header("Cookie", "token=" + token)
+                .when()
+                .delete();
+
+        return response;
+    }
+
 }
