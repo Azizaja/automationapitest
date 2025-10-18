@@ -20,6 +20,16 @@ public class BooksColectionAPI extends BaseTest {
         return response;
     }
 
+    //create booking 
+    // public static <T> Response createBookingAPI(T requestBody) {
+    //     Response response = given()
+    //             .basePath("/booking")
+    //             .body(requestBody)
+    //             .when()
+    //             .post();
+    //     return response;
+    // }
+
     // get booking
     public static Response getBooksFromCollectionsAPI(int idBooking) {
         // int idBooking = 1;

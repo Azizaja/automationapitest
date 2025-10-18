@@ -1,0 +1,94 @@
+[
+    {
+        "usecase": "add_booking_data1",
+        "payload": {
+            "firstname": "John",
+            "lastname": "Doe",
+            "totalprice": 150,
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": "2023-10-01",
+                "checkout": "2023-10-10"
+            },
+            "additionalneeds": "Breakfast"
+        },
+        
+        "expectedValue": {
+            "statusCode": 200,
+            "body": {
+                "booking": {
+                    "firstname": "John",
+                    "lastname": "Doe",
+                    "totalprice": 150,
+                    "depositpaid": true,
+                    "bookingdates": {
+                        "checkin": "2023-10-01",
+                        "checkout": "2023-10-10"
+                    },
+                    "additionalneeds": "Breakfast"
+                }
+            }
+        }
+           
+    },
+    {
+        "usecase": "add_booking_data2",
+        "payload": {
+            "firstname": "Jane",
+            "lastname": "Smith",
+            "totalprice": 200,
+            "depositpaid": false,
+            "bookingdates": {
+                "checkin": "2023-11-05",
+                "checkout": "2023-11-15"
+            },
+            "additionalneeds": "Late Checkout"
+        },
+        "expectedValue": {
+            "statusCode": 200,
+            "body": {
+                "booking": {
+                    "firstname": "Jane",
+                    "lastname": "Smith",
+                    "totalprice": 200,
+                    "depositpaid": false,
+                    "bookingdates": {
+                        "checkin": "2023-11-05",
+                        "checkout": "2023-11-15"
+                    },
+                    "additionalneeds": "Late Checkout"
+                }
+            }
+        }
+    },
+    {
+        "usecase": "add_booking_data3",
+        "payload": {
+            "firstname": "Alice",
+            "lastname": "Johnson",
+            "totalprice": 300,
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": "2023-12-20",
+                "checkout": "2023-12-30"
+            },
+            "additionalneeds": "Airport Pickup"
+        },
+        "expectedValue": {
+            "statusCode": 200,
+            "body": {
+                "booking": {
+                    "firstname": "Alice",
+                    "lastname": "Johnson",
+                    "totalprice": 300,
+                    "depositpaid": true,
+                    "bookingdates": {
+                        "checkin": "2023-12-20",
+                        "checkout": "2023-12-30"
+                    },
+                    "additionalneeds": "Airport Pickup"
+                }
+            }
+        }
+    }
+]

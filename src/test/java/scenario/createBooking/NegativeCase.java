@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.apitest.base.BaseTest;
+import com.apitest.model.response.ResponseCreateBoking;
+import com.apitest.utils.Helper;
 
 import apiengine.BooksColectionAPI;
 import io.restassured.response.Response;
@@ -29,15 +31,17 @@ public class NegativeCase extends BaseTest {
                 """;
 
         Response response = BooksColectionAPI.createBookingAPI(requestBody);
-        response.then().log().all();
-        Assert.assertNotEquals(response.statusCode(), 400, "Should NOT return 400 for missing required field");
+        // response.then().log().all();
+        ResponseCreateBoking bookingResponse = Helper.convertResponseToObject(response, ResponseCreateBoking.class);
+        Assert.assertFalse(bookingResponse != null && bookingResponse.bookingId > 0, "Booking should NOT be created with missing required fields");
         
+        Assert.assertNotEquals(response.statusCode(), 400, "Should NOT return 400 for missing required field");
         System.out.println("Missing request body test passed - Server rejected invalid request with status: "
         + response.statusCode());
-
-        Assert.assertFalse(response.asString().contains("Bad Request"), "Response should indicate bad request");
-        Assert.assertFalse(response.asString().contains("bookingid"), "Response should not contain bookingid");
-        Assert.assertFalse(response.asString().contains("booking"), "Response should not contain booking details");
+        
+        // Assert.assertFalse(response.asString().contains("Bad Request"), "Response should indicate bad request");
+        // Assert.assertFalse(response.asString().contains("bookingid"), "Response should not contain bookingid");
+        // Assert.assertFalse(response.asString().contains("booking"), "Response should not contain booking details");
 
         // tidak bisa dieksekusi karena server mengembalikan 500, bukan 400
         // Assert.assertEquals(response.statusCode(), 400, "Should return 400 for missing required fields");
@@ -63,7 +67,9 @@ public class NegativeCase extends BaseTest {
                 """;
 
         Response response = BooksColectionAPI.createBookingAPI(requestBody);
-        response.then().log().all();
+        // response.then().log().all();
+        ResponseCreateBoking bookingResponse = Helper.convertResponseToObject(response, ResponseCreateBoking.class);
+        Assert.assertFalse(bookingResponse != null && bookingResponse.bookingId > 0, "Booking should NOT be created with invalid data types");
 
         // Assert.assertEquals(response.statusCode(), 200, "Should NOT return 200 for invalid data types");
         Assert.assertNotEquals(response.statusCode(), 400, "Should NOT return 400 for invalid data types");
@@ -71,9 +77,9 @@ public class NegativeCase extends BaseTest {
         System.out.println("Invalid data types body test passed - Server rejected invalid request with status: "
         + response.statusCode());
 
-        Assert.assertFalse(response.asString().contains("Bad Request"), "Response should indicate bad request");
-        Assert.assertTrue(response.asString().contains("bookingid"), "Response should not contain bookingid");
-        Assert.assertTrue(response.asString().contains("booking"), "Response should not contain booking details");
+        // Assert.assertFalse(response.asString().contains("Bad Request"), "Response should indicate bad request");
+        // Assert.assertTrue(response.asString().contains("bookingid"), "Response should not contain bookingid");
+        // Assert.assertTrue(response.asString().contains("booking"), "Response should not contain booking details");
         System.out.println("Invalid data type test passed");
     }
 
@@ -84,13 +90,15 @@ public class NegativeCase extends BaseTest {
         String requestBody = "{}";
 
         Response response = BooksColectionAPI.createBookingAPI(requestBody);
-        response.then().log().all();
+        // response.then().log().all();
+        ResponseCreateBoking bookingResponse = Helper.convertResponseToObject(response, ResponseCreateBoking.class);
+        Assert.assertFalse(bookingResponse != null && bookingResponse.bookingId > 0, "Booking should NOT be created with empty request body");
         
         Assert.assertNotEquals(response.statusCode(), 400, "Should NOT return 400 for empty request body");
         
-        Assert.assertFalse(response.asString().contains("Bad Request"), "Response should indicate bad request");
-        Assert.assertFalse(response.asString().contains("bookingid"), "Response should not contain bookingid");
-        Assert.assertFalse(response.asString().contains("booking"), "Response should not contain booking details");
+        // Assert.assertFalse(response.asString().contains("Bad Request"), "Response should indicate bad request");
+        // Assert.assertFalse(response.asString().contains("bookingid"), "Response should not contain bookingid");
+        // Assert.assertFalse(response.asString().contains("booking"), "Response should not contain booking details");
         System.out.println("Empty request body test passed - Server rejected invalid request with status: "
         + response.statusCode());
         

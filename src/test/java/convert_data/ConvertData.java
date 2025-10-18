@@ -27,7 +27,8 @@ public class ConvertData {
                 "additionalneeds": "Breakfast"
             }
             """;
-
+        // untuk convert ke Java Object di RequestCreateBooking
+        // objecct mapper akan map data JSON ke atribut di RequestCreateBooking
         ObjectMapper objectMapper = new ObjectMapper();
         RequestCreateBooking requestCreateBooking = objectMapper.readValue(requestBody, RequestCreateBooking.class);
         System.out.println("--- Convert JSON String to Java Object ---");
