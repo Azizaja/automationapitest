@@ -7,11 +7,19 @@ import com.apitest.base.BaseTest;
 import io.restassured.response.Response;
 
 public class BooksColectionAPI extends BaseTest {
-    // public BooksColectionAPI() {
+    // ==========CREATE API ==============
+    // create booking
+    // public static Response createBookingAPI(String requestBody) {
+    // Response response = given()
+    // .basePath("/booking")
+    // .body(requestBody)
+    // .when()
+    // .post();
+    // return response;
     // }
 
     // create booking
-    public static Response createBookingAPI(String requestBody) {
+    public static <T> Response createBookingAPI(T requestBody) {
         Response response = given()
                 .basePath("/booking")
                 .body(requestBody)
@@ -20,16 +28,7 @@ public class BooksColectionAPI extends BaseTest {
         return response;
     }
 
-    //create booking 
-    // public static <T> Response createBookingAPI(T requestBody) {
-    //     Response response = given()
-    //             .basePath("/booking")
-    //             .body(requestBody)
-    //             .when()
-    //             .post();
-    //     return response;
-    // }
-
+    // ==========GET API ==============
     // get booking
     public static Response getBooksFromCollectionsAPI(int idBooking) {
         // int idBooking = 1;
@@ -41,11 +40,11 @@ public class BooksColectionAPI extends BaseTest {
         return response;
     }
 
-
+    // ==========UPDATE API ==============
     // update booking
     public static Response updateBookingAPI(String requestBody, int bookingId) {
         // int idBooking = BaseTest.getBookingId();
-        String token = BaseTest.token;        
+        String token = BaseTest.token;
 
         System.out.println("=== UPDATE API DEBUG ===");
         // System.out.println("Booking ID: " + idBooking);
@@ -61,8 +60,9 @@ public class BooksColectionAPI extends BaseTest {
         return response;
     }
 
+    // ==========DELETE API ==============
     // delete booking
-    public static Response deleteBookingAPI(String requestBody, int idBooking) {
+    public static Response deleteBookingAPI(int idBooking) {
         // int idBooking = BaseTest.getBookingId();
         String token = BaseTest.token;
 

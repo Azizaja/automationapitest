@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.apitest.base.BaseTest;
+import com.apitest.model.request.RequestCreateBooking;
+import com.apitest.utils.Helper;
 
 import apiengine.BooksColectionAPI;
 import io.restassured.response.Response;
@@ -34,21 +36,14 @@ public class NegativeCase extends BaseTest{
         System.out.println("Negative Test: Delete Already Deleted Booking");
         
         // First create and delete a booking
-        String createBody = """
-            {
-                "firstname": "Temp",
-                "lastname": "User",
-                "totalprice": 100,
-                "depositpaid": true,
-                "bookingdates": {
-                    "checkin": "2024-01-01",
-                    "checkout": "2024-01-02"
-                }
-            }
-            """;
-            
-        Response createResponse = BooksColectionAPI.createBookingAPI(createBody);
-        int tempBookingId = createResponse.jsonPath().getInt("bookingid");
+        RequestCreateBooking bookingData = Helper.findByUseCase(
+                "booking_data.json",
+                "add_booking_data3",
+                RequestCreateBooking.class);
+        String requestBody = Helper.convertToJson(bookingData);
+
+        Response response = BooksColectionAPI.createBookingAPI(requestBody);
+        int tempBookingId = response.jsonPath().getInt("bookingid");
         
         // Delete it first
         BooksColectionAPI.deleteBookingWithId(tempBookingId);
