@@ -1,5 +1,13 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="API Test Suite" parallel="false">
+    <!-- Auth test -->
+    <test name="Auth Test">
+        <classes>
+            <class name="scenario.authTest.AuthPositiveTest"/>
+            <class name="scenario.authTest.NegativeAuthTest"/>
+        </classes>
+    </test>
+    
     <!-- create booking -->
     <test name="Create Booking Test">
         <classes>
@@ -28,6 +36,13 @@
         <classes>
             <class name="scenario.deleteBooking.PositiveCase"/>
             <class name="scenario.deleteBooking.NegativeCase"/>
+        </classes>
+    </test>
+
+    <!-- integration test -->
+    <test name="Integration Test: Create, Get, Delete Booking">
+        <classes>
+            <class name="scenario.integrationTest.CreateGetDeleteIntegrationTest"/>
         </classes>
     </test>
 </suite>
