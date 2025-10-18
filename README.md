@@ -102,6 +102,10 @@ Edit `testNG.xml` untuk mengubah test suite configuration:
 
 This project is for educational purposes. Feel free to use and modify.
 
+## 🔗 Documentation
+CI/CD Pipeline : https://drive.google.com/drive/folders/1y_PXp2ZGuBy6HQim7CCMlLDy-zESzQXq?usp=sharing
+
+
 ## 🆘 Support
 
 Jika mengalami issues:
