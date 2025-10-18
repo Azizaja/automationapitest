@@ -4,7 +4,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.apitest.base.BaseTest;
+import com.apitest.model.request.RequestCreateBooking;
 import com.apitest.model.response.ResponseCreateBoking;
+import com.apitest.utils.Helper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,31 +29,21 @@ public class PositiveCase extends BaseTest {
         System.out.println("Create Booking");
         System.out.println("Base URI: " + BaseTest.BaseURI);
 
-        String requestBody = """
-                {
-                    "firstname": "Jim",
-                    "lastname": "Brown",
-                    "totalprice": 111,
-                    "depositpaid": true,
-                    "bookingdates": {
-                        "checkin": "2018-01-01",
-                        "checkout": "2019-01-01"
-                    },
-                    "additionalneeds": "Breakfast"
-                }
-                """;
+        RequestCreateBooking bookingData = Helper.findByUseCase(
+                "booking_data.json",
+                "add_booking_data2",
+                RequestCreateBooking.class);
+        String requestBody = Helper.convertToJson(bookingData);
 
         Response response = BooksColectionAPI.createBookingAPI(requestBody);
-        ObjectMapper objectMapper = new ObjectMapper();
-        ResponseCreateBoking bookingResponse = objectMapper.readValue(response.asString(), ResponseCreateBoking.class);
-        response.then().log().all();
-        System.out.println(response.asPrettyString());
+        ResponseCreateBoking bookingResponse = Helper.convertResponseToObject(response, ResponseCreateBoking.class);
+        
         Assert.assertEquals(response.statusCode(), 200, "Status code is not 200");
         Assert.assertNotNull(bookingResponse.bookingId, "Booking ID is null");
-        Assert.assertEquals(bookingResponse.booking.firstName, "Jim", "Firstname is not Jim");
-        Assert.assertEquals(bookingResponse.booking.lastName, "Brown", "Lastname is not Brown");
+        Assert.assertEquals(bookingResponse.booking.firstName, "Jane", "Firstname is not Jane");
+        Assert.assertEquals(bookingResponse.booking.lastName, "Smith", "Lastname is not Smith");
 
-        // SIMPAN bookingId ke BaseTest untuk test selanjutnya
+        // SIMPAN bookingId untuk test selanjutnya
         bookingId = bookingResponse.bookingId;
         System.out.println("Booking ID Created and Saved: " + bookingId);
         System.out.println("Create Booking Selesai");
@@ -63,21 +55,13 @@ public class PositiveCase extends BaseTest {
 
         // Debug info - pastikan bookingId dan token sudah ada
         // System.out.println("Booking ID from BaseTest: " + BaseTest.getBookingId());
-        System.out.println("Token from BaseTest: " + BaseTest.token);
+        // System.out.println("Token from BaseTest: " + BaseTest.token);
 
-        String requestBody = """
-                {
-                    "firstname": "James",
-                    "lastname": "Brown",
-                    "totalprice": 111,
-                    "depositpaid": true,
-                    "bookingdates": {
-                        "checkin": "2018-01-01",
-                        "checkout": "2019-01-01"
-                    },
-                    "additionalneeds": "Breakfast"
-                }
-                """;
+        RequestCreateBooking bookingData = Helper.findByUseCase(
+                "booking_data.json",
+                "add_booking_data4",
+                RequestCreateBooking.class);
+        String requestBody = Helper.convertToJson(bookingData);
 
         Response response = BooksColectionAPI.updateBookingAPI(requestBody, bookingId);
 
@@ -88,5 +72,29 @@ public class PositiveCase extends BaseTest {
         Assert.assertEquals(response.statusCode(), 200, "Status code is not 200");
         Assert.assertEquals(response.jsonPath().getString("firstname"), "James", "Firstname is not James");
         System.out.println("Update Booking Selesai");
+    }
+
+    @Test
+    public void UpdateBooking_FullData() {
+        System.out.println("Update Booking with Full Data");
+
+        RequestCreateBooking bookingData = Helper.findByUseCase(
+                "booking_data.json",
+                "add_booking_data1",
+                RequestCreateBooking.class);
+        String requestBody = Helper.convertToJson(bookingData);
+
+        Response createResponse = BooksColectionAPI.createBookingAPI(requestBody);
+        int tempBookingId = createResponse.jsonPath().getInt("bookingid");
+
+        Response response = BooksColectionAPI.updateBookingAPI(requestBody, tempBookingId);
+
+        System.out.println("Status Code: " + response.getStatusCode());
+        System.out.println("Response Body: " + response.getBody().asString());
+
+        Assert.assertEquals(response.statusCode(), 200, "Status code is not 200");
+        Assert.assertEquals(response.jsonPath().getString("firstname"), "John", "Firstname is not John");
+        Assert.assertEquals(response.jsonPath().getString("lastname"), "Doe", "Lastname is not Doe");
+        System.out.println("Update Booking with Full Data Selesai");
     }
 }
