@@ -13,7 +13,7 @@ import io.restassured.response.Response;
 public class Helper {
     public static Dotenv dotenv;
     private static ObjectMapper objectMapper, mapper = new ObjectMapper();
-    private static final String DATA_PATH = "src/test/java/resources/";
+    private static final String DATA_PATH = "src/test/resources/data/";
 
     public static Dotenv loadDotenv() {
         dotenv = Dotenv.load();
